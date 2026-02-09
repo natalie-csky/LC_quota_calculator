@@ -10,10 +10,13 @@ config_version=5
 
 [application]
 
-config/name="quota"
+config/name="LC Quota Calculator"
 run/main_scene="uid://b2joqfsx7fgcv"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [physics]
 

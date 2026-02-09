@@ -7,13 +7,11 @@ const DAYS := 3 as int
 
 @export var amount_quotas := 20 as int
 
-@export_group("Quota Settings")
-@export var starting_quota := 130 as int
-@export var base_increase := 100
-@export var steepness := 16.0 as float
-@export var curve_multiplier := 1.0 as float
-
-var SAMPLE_RUNS := 300000 as int
+var starting_quota := 130.0 as float
+var base_increase := 100.0 as float
+var steepness := 16.0 as float
+var curve_multiplier := 1.0 as float
+var SAMPLE_RUNS := 10000 as int
 
 
 ## higher luck:
@@ -73,10 +71,9 @@ func _on_button_pressed() -> void:
 		avg_needed_label.text = avg_needed_label.text + str(avg_needed).pad_decimals(0) + '\n'
 
 
-
 func _do_runs() -> Array:
 	var runs_quotas := []
-	var quota := 0
+	var quota := 0.0
 	var quotas := []
 
 	for _j in range(SAMPLE_RUNS):
@@ -91,7 +88,7 @@ func _do_runs() -> Array:
 				continue
 
 			times_fulfilled += 1
-			quota += int(_calc_and_get_increase())
+			quota += _calc_and_get_increase()
 			quotas.append(quota)
 
 		runs_quotas.append(quotas)
@@ -122,3 +119,23 @@ func _on_total_luck_text_changed(new_text: String) -> void:
 func _on_amount_runs_text_changed(new_text: String) -> void:
 	if new_text.is_valid_int():
 		SAMPLE_RUNS = int(new_text)
+
+
+func _on_starting_quota_text_changed(new_text: String) -> void:
+	if new_text.is_valid_float():
+		starting_quota = float(new_text)
+
+
+func _on_base_increase_text_changed(new_text: String) -> void:
+	if new_text.is_valid_float():
+		base_increase = float(new_text)
+
+
+func _on_steepness_text_changed(new_text: String) -> void:
+	if new_text.is_valid_float():
+		steepness = float(new_text)
+
+
+func _on_curve_multiplier_text_changed(new_text: String) -> void:
+	if new_text.is_valid_float():
+		curve_multiplier = float(new_text)
